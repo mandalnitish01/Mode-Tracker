@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .mood-container {
+            margin: 20px;
+        }
+        .mood-button {
+            font-size: 24px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+        .timeline {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .mood-entry {
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Daily Mood Tracker</h1>
+    <div class="mood-container">
+        <p>Select your mood for today:</p>
+        <button class="mood-button" onclick="saveMood('😀')">😀</button>
+        <button class="mood-button" onclick="saveMood('😊')">😊</button>
+        <button class="mood-button" onclick="saveMood('😐')">😐</button>
+        <button class="mood-button" onclick="saveMood('😢')">😢</button>
+        <button class="mood-button" onclick="saveMood('😡')">😡</button>
+        <button class="mood-button" onclick="saveMood('🤩')">🤩</button>
+    </div>
+    <h2>Past Moods</h2>
+    <div class="timeline" id="timeline"></div>
+    <script>
+        function saveMood(mood) {
+            const today = new Date().toISOString().split('T')[0]; // Get current date
+            let moods = JSON.parse(localStorage.getItem('moods')) || {};
+            moods[today] = mood;
+            localStorage.setItem('moods', JSON.stringify(moods));
+            displayMoods();
+        }
+
+        function displayMoods() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '';
+            let moods = JSON.parse(localStorage.getItem('moods')) || {};
+            
+            for (let date in moods) {
+                const div = document.createElement('div');
+                div.className = 'mood-entry';
+                div.innerText = `${date}: ${moods[date]}`;
+                timeline.appendChild(div);
+            }
+        }
+
+        displayMoods();
+    </script>
+</body>
+</html>
