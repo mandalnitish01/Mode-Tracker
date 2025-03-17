@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+.mood-container {
+    margin: 20px;
+}
+.mood-button {
+    font-size: 24px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+.timeline {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.mood-entry {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
